@@ -1,0 +1,98 @@
+/api/users:
+  post:
+    tags:
+      - User
+    produces:
+      - application/json
+    summary: Add new user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+                format: password
+              firstname:
+                type: string
+              lastname:
+                type: string
+              phone:
+                type: string
+              isTrainer:
+                type: boolean
+              birthday:
+                type: string
+                format: date
+    responses:
+      200:
+        description: New user added
+      409:
+        description: User already exist
+
+/api/users/{id}:
+  patch:
+    tags:
+      - User
+    summary: Update user
+    parameters:
+      - name: id
+        in: path
+        required: true
+        format:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+              firstname:
+                type: string
+              lastname:
+                type: string
+              phone:
+                type: string
+              birthday:
+                type: string
+                format: date
+    responses:
+      200:
+        description: User updated
+      400:
+        description: Error
+
+/api/users/{id}/avatar:
+  patch:
+    tags:
+      - User
+    summary: Update user avatar
+    parameters:
+      - name: id
+        in: path
+        required: true
+        format:
+          type: string
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              avatar:
+                type: string
+                format: binary
+    responses:
+      200:
+        description: User avatar updated
+      400:
+        description: Error

@@ -1,0 +1,46 @@
+/auth/access_token:
+  post:
+    tags:
+      - Authentication
+    produces:
+      - application/json
+    summary: Generate authentication token
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+    responses:
+      200:
+        description: Auth token
+      400:
+        description: Bad request
+
+/auth/refresh_token:
+  post:
+    tags:
+      - Authentication
+    produces:
+      - application/json
+    summary: Generate authentication token by refresh token
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+    responses:
+      200:
+        description: Auth token
+      400:
+        description: Bad request
